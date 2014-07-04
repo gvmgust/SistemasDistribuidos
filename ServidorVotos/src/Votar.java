@@ -8,13 +8,17 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Gustavo Vargas M
  */
-public interface Votar  extends Remote {
-    public void emitirVoto(String v,String ci)throws RemoteException;
-    public int loguea(String ci, String pass)throws RemoteException;
-    public ArrayList<String> listarOpciones();
+public interface Votar extends Remote {
+
+    public void emitirVoto(String v, String ci) throws RemoteException;
+
+    public int loguea(String ci, String pass) throws RemoteException;
+
+    public ArrayList<String> listarOpciones() throws RemoteException;
+
+    public String pregunta() throws RemoteException;
 }

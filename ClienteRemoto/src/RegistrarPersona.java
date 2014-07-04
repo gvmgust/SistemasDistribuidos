@@ -36,7 +36,7 @@ public class RegistrarPersona extends javax.swing.JFrame {
         } else {
             Registrar registrar;
             try {
-                registrar = (Registrar) Naming.lookup("rmi://localhost/registro");
+                registrar = (Registrar) Naming.lookup("rmi://"+Main.serverRegistro+"/registro");
                 if (!registrar.registrado(jTextField5.getText())) {
                     registrar.registrarPersona(jTextField5.getText(), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jPasswordField1.getText());
                 }else{

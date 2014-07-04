@@ -1,9 +1,16 @@
+
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Gustavo Vargas M
@@ -18,6 +25,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setTitle("Votacion");
+        conectar();
     }
 
     /**
@@ -61,6 +69,11 @@ public class InterfazCliente extends javax.swing.JFrame {
 
         jButton2.setText("Reactivar");
         jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Registrarse");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +132,11 @@ public class InterfazCliente extends javax.swing.JFrame {
 
         jButton3.setText("Votar");
         jButton3.setEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -128,14 +146,12 @@ public class InterfazCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addGap(71, 71, 71))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,9 +170,9 @@ public class InterfazCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -177,11 +193,86 @@ public class InterfazCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        ingresar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ci = jTextField1.getText();
+        try {
+            votar.emitirVoto( jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).toString(),ci);
+        } catch (RemoteException ex) {
+            Logger.getLogger(InterfazCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jTextField1.setText("");
+        jPasswordField1.setText("");
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        ci = null;
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void ingresar() {
+        int op = 0;
+        try {
+            op = votar.loguea(jTextField1.getText(), jPasswordField1.getText());
+        } catch (RemoteException ex) {
+            Logger.getLogger(InterfazCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(op);
+        switch (op) {
+            case -1:
+                JOptionPane.showMessageDialog(rootPane, "Los datos que ingreso son incorrectos, \no la cuenta no existe");
+                break;
+            case 0:
+                JOptionPane.showMessageDialog(rootPane, "ha sido depurada, proceda a desbloquearla");
+                jButton2.setEnabled(true);
+                break;
+            case 1:
+                logueo();
+                break;
+            case 2:
+        }
+
+    }
+
+    public void logueo() {
+        jButton3.setEnabled(true);
+    }
+
+    public void conectar() {
+        try {
+            votar = (Votar) Naming.lookup("rmi://"+Main.serverVotos+"/votos");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        verOpciones();
+    }
+
+    public void verOpciones() {
+        ArrayList<String> l = null;
+        try {
+            l = votar.listarOpciones();
+        } catch (RemoteException ex) {
+            Logger.getLogger(InterfazCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jComboBox1.removeAllItems();
+
+        for (int i = 0; i < l.size(); i++) {
+            jComboBox1.addItem(l.get(i));
+        }
+        try {
+            jLabel3.setText(votar.pregunta());
+        } catch (RemoteException ex) {
+            Logger.getLogger(InterfazCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private String ci;
+    Votar votar;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

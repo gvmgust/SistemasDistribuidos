@@ -42,4 +42,8 @@ public abstract class SQL {
                 + "ON opciones.id_opc = postulantes.`id_opc`\n"
                 + "WHERE id_ele = '" + Main.Eleccion + "'";
     }
+    
+    public static String verPregunta(){
+        return "SELECT pregunta FROM eleccion WHERE id_elec = "+Main.Eleccion;
+    }
 }

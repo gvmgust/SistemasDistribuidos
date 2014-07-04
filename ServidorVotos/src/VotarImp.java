@@ -23,11 +23,11 @@ public class VotarImp extends UnicastRemoteObject implements Votar {
     }
 
     @Override
-    public void emitirVoto(String v,String ci) {
+    public void emitirVoto(String v, String ci) {
         int id_opc = -1;
         ResultSet rs = Main.con.consultar(SQL.buscarOpcion(v));
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 id_opc = rs.getInt(1);
             }
         } catch (SQLException ex) {
@@ -49,17 +49,6 @@ public class VotarImp extends UnicastRemoteObject implements Votar {
         } catch (SQLException ex) {
             Logger.getLogger(VotarImp.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(activo==1){
-            rs = Main.con.consultar(SQL.verificarSiVoto(ci));
-            try {
-                while(rs.next()){
-                    activo = 2;
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(VotarImp.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
         return activo;
     }
 
@@ -77,5 +66,18 @@ public class VotarImp extends UnicastRemoteObject implements Votar {
         return opciones;
     }
 
+    @Override
+    public String pregunta() throws RemoteException {
+        String s = "";
+        ResultSet rs = Main.con.consultar(SQL.verPregunta());
+        try {
+            while (rs.next()) {
+                s += rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VotarImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+    }
 
 }
