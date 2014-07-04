@@ -10,13 +10,14 @@
  */
 public abstract class SQL {
 
-    public static String registrarPersona(String ci, String nombre, String apellidop, String apellidom, String direccion, int habilitado) {
+    public static String registrarPersona(String ci, String nombre, String apellidop, String apellidom, String direccion, String pass) {
         return "INSERT INTO `persona`(`ci`,`nombre`,`apellido_paterno`,`apellido_materno`,`Direccion`,`habilitado`) VALUES ( '"
                 + ci + "','"
                 + nombre + "','"
                 + apellidop + "','"
                 + apellidom + "','"
-                + direccion + "','1'); ";
+                + direccion + "','"
+                + Tools.sha1(pass)+"'); ";
     }
 
     public static String mostrarUltimosNHabilitados(int limite) {
