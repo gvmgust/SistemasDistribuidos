@@ -14,7 +14,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new InterfazCliente();
     }
     public static String serverRegistro;
     public static String serverVotos;

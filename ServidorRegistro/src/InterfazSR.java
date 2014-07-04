@@ -7,6 +7,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -152,22 +153,42 @@ public class InterfazSR extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(5).setMaxWidth(200);
         jTable1.getColumnModel().getColumn(5).setMinWidth(150);
         ResultSet rs = Main.con.consultar(SQL.mostrarUltimosNHabilitados(20));
+        ArrayList<persona> l = new ArrayList();
         try {
-            while (rs.next()) {
-                Object[] vector = new Object[7];
-                vector[0] = rs.getString(1);
-                vector[1] = rs.getString(2);
-                vector[2] = rs.getString(3);
-                vector[3] = rs.getString(4);
-                vector[4] = rs.getString(5);
-                vector[5] = rs.getString(6);
-                modelo.addRow(vector);
+            while (rs.next()) {                
+                l.add(new persona(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(InterfazSR.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for(int i=0;i<l.size();i++){
+            modelo.addRow(l.get(i).parseVector());
+        }
     }
 
+    private class persona{
+        String ci;
+        String ap;
+        String am;
+        String n;
+        String dir;
+        String fi;
+
+        public persona(String ci, String ap, String am, String n, String dir, String fi) {
+            this.ci = ci;
+            this.ap = ap;
+            this.am = am;
+            this.n = n;
+            this.dir = dir;
+            this.fi = fi;
+        }      
+        
+        public Object[] parseVector(){
+            Object[]v = {ci,ap,am,n,dir,fi};
+            return v;
+        }
+    }
+    
     private void iniciarFinalizar() {
         try {
             if (estado) {

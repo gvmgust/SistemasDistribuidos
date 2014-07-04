@@ -21,7 +21,7 @@ public class Main {
      */
     public static void main(String[] args) {
         style();
-        InterfazSR interfaz = InterfazSR.getInstance();
+        interfaz = InterfazSR.getInstance();
     }
     
     public static void style() {
