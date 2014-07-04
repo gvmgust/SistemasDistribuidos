@@ -16,5 +16,6 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
+    public static String serverRegistro;
+    public static String serverVotos;
 }
