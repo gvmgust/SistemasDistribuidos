@@ -21,13 +21,20 @@ public class InterfazOpciones extends javax.swing.JFrame {
     /**
      * Creates new form InterfazOpciones
      */
-    public InterfazOpciones() {
+    private InterfazOpciones() {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setTitle("Agregar Opciones a Eleccion");
     }
 
+     public static InterfazOpciones getInstance() {
+        if (myInstance == null) {
+            myInstance = new InterfazOpciones();
+        }
+        return myInstance;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +56,12 @@ public class InterfazOpciones extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -185,6 +197,10 @@ public class InterfazOpciones extends javax.swing.JFrame {
         Main.con.ejecutar(SQL.insertarOpcion(id_opc, opcion));
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        myInstance = null;
+    }//GEN-LAST:event_formWindowClosed
+
     private class Opcion {
 
         int id_opc;
@@ -202,6 +218,7 @@ public class InterfazOpciones extends javax.swing.JFrame {
     };
     private ArrayList<Opcion> registradas = new ArrayList<Opcion>();
     private ArrayList<Opcion> paraEleccion = new ArrayList<Opcion>();
+    private static InterfazOpciones myInstance;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

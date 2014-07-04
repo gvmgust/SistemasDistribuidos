@@ -14,7 +14,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        interfaz = new InterfazSR();
+        InterfazSR interfaz = InterfazSR.getInstance();
     }
     public static Conexion con = new Conexion("root", "", "localhost", "sistemasdistribuidos");
     public static InterfazSR interfaz;
