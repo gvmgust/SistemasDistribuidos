@@ -21,16 +21,21 @@ public class InterfazOpciones extends javax.swing.JFrame {
     /**
      * Creates new form InterfazOpciones
      */
-    private InterfazOpciones() {
+    private InterfazOpciones(int id) {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setTitle("Agregar Opciones a Eleccion");
+        this.cargarDatos();
+        this.cargarTablas();
+        this.id = id;
     }
-    
-    public static InterfazOpciones getInstance() {
+
+    public int id;
+
+    public static InterfazOpciones getInstance(int id_elec) {
         if (myInstance == null) {
-            myInstance = new InterfazOpciones();
+            myInstance = new InterfazOpciones(id_elec);
         }
         return myInstance;
     }
@@ -75,6 +80,11 @@ public class InterfazOpciones extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(0, 0, 204));
         jButton1.setText("Agregar >>>>");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -83,17 +93,17 @@ public class InterfazOpciones extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(11, 11, 11))
+                .addGap(6, 6, 6))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Para la Votacion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -105,6 +115,11 @@ public class InterfazOpciones extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 0, 0));
         jButton2.setText("<<<< Quitar");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -113,17 +128,17 @@ public class InterfazOpciones extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                .addGap(7, 7, 7)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap())
+                .addGap(7, 7, 7))
         );
 
         jButton3.setText("Registrar nuevas Opciones");
@@ -133,7 +148,12 @@ public class InterfazOpciones extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Salir");
+        jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,14 +175,16 @@ public class InterfazOpciones extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel2, jPanel3});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,21 +220,90 @@ public class InterfazOpciones extends javax.swing.JFrame {
         if (Tools.pregunta("Desea agregar " + opcion + " como nueva Opcion?")) {
             Main.con.ejecutar(SQL.insertarOpcion(id_opc, opcion));
         }
+        this.cargarDatos();
+        this.cargarTablas();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void cargarDatos(){
-        
+    private void cargarDatos() {
+        registradas.clear();
+        ResultSet rs = Main.con.consultar(SQL.seleccionarOpciones());
+        try {
+            while (rs.next()) {
+                registradas.add(rs.getString(2));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < paraEleccion.size(); i++) {
+            String o = paraEleccion.get(i);
+            registradas.remove(o);
+        }
     }
-    
+
+    private void cargarTablas() {
+        modelo1.setColumnCount(0);
+        modelo1.setRowCount(0);
+        modelo1.addColumn("Opcion");
+        for (int i = 0; i < registradas.size(); i++) {
+            String[] v = {registradas.get(i)};
+            modelo1.addRow(v);
+        }
+        modelo2.setColumnCount(0);
+        modelo2.setRowCount(0);
+        modelo2.addColumn("Opcion");
+        for (int i = 0; i < paraEleccion.size(); i++) {
+            String[] v = {paraEleccion.get(i)};
+            modelo2.addRow(v);
+        }
+
+    }
+
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         myInstance = null;
     }//GEN-LAST:event_formWindowClosed
-    
-    private class Opcion {        
-        int id_opc;
-        String opcion;
-    }
-    
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (!paraEleccion.contains(registradas.get(jTable1.getSelectedRow()))) {
+            paraEleccion.add(registradas.get(jTable1.getSelectedRow()));
+        }
+        this.cargarDatos();
+        this.cargarTablas();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (!registradas.contains(paraEleccion.get(jTable2.getSelectedRow()))) {
+            registradas.add(paraEleccion.get(jTable2.getSelectedRow()));
+            paraEleccion.remove(paraEleccion.get(jTable2.getSelectedRow()));
+        }
+        this.cargarDatos();
+        this.cargarTablas();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (Tools.pregunta("Desea agregar las Opciones seleccionadas?")) {
+            String s = "";
+            for (int i = 0; i < paraEleccion.size(); i++) {
+                if (i == 0) {
+                    s += "'" + paraEleccion.get(i) + "'";
+                } else {
+                    s += ",'" + paraEleccion.get(i) + "'";
+                }
+            }
+            ResultSet rs = Main.con.consultar(SQL.idOpciones(s));
+            ArrayList<Integer> lista = new ArrayList();
+            try {
+                while (rs.next()) {
+                    lista.add(rs.getInt(1));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(InterfazOpciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (int i = 0; i < lista.size(); i++) {
+                Main.con.ejecutar(SQL.insertarPostulantes(this.id, lista.get(i)));
+            }
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     private DefaultTableModel modelo1 = new DefaultTableModel() {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -223,8 +314,8 @@ public class InterfazOpciones extends javax.swing.JFrame {
             return false;
         }
     };
-    private ArrayList<Opcion> registradas = new ArrayList<Opcion>();
-    private ArrayList<Opcion> paraEleccion = new ArrayList<Opcion>();
+    private ArrayList<String> registradas = new ArrayList<String>();
+    private ArrayList<String> paraEleccion = new ArrayList<String>();
     private static InterfazOpciones myInstance;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
