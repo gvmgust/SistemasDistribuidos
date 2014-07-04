@@ -18,4 +18,16 @@ public abstract class SQL {
                 + apellidom + "','"
                 + direccion + "','1'); ";
     }
+
+    public static String mostrarUltimosNHabilitados(int limite) {
+        return "SELECT * FROM persona WHERE habilitado = 1 ORDER BY fecha_inscripcion DESC LIMIT 0," + limite + ";";
+    }
+
+    public static String seleccionarMaximoId_opc() {
+        return "SELECT MAX(id_opc)+1 FROM opciones";
+    }
+
+    public static String insertarOpcion(int id_opc, String opcion) {
+        return "Insert into opciones(id_opc,opcion)values('" + id_opc + "','" + opcion + "'";
+    }
 }
