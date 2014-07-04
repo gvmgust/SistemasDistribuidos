@@ -1,0 +1,1 @@
+ALTER TABLE `sistemasdistribuidos`.`eleccion` ADD COLUMN `pregunta` VARCHAR(200) NOT NULL AFTER `id_elec`; 
