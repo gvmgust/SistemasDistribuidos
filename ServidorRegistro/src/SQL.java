@@ -28,6 +28,6 @@ public abstract class SQL {
     }
 
     public static String insertarOpcion(int id_opc, String opcion) {
-        return "Insert into opciones(id_opc,opcion)values('" + id_opc + "','" + opcion + "'";
+        return "Insert into opciones(id_opc,opciones)values('" + id_opc + "','" + opcion + "');";
     }
 }
