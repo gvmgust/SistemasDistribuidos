@@ -1,3 +1,6 @@
+
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +14,12 @@
 public abstract class SQL {
 
     public static String registrarPersona(String ci, String nombre, String apellidop, String apellidom, String direccion, String pass) {
-        return "INSERT INTO `persona`(`ci`,`nombre`,`apellido_paterno`,`apellido_materno`,`Direccion`,`habilitado`) VALUES ( '"
+        return "INSERT INTO `persona`(`ci`,`nombre`,`apellido_paterno`,`apellido_materno`,`Direccion`,`fecha_inscripcion`,`habilitado`,`pass`) VALUES ( '"
                 + ci + "','"
                 + nombre + "','"
                 + apellidop + "','"
                 + apellidom + "','"
-                + direccion + "','"
+                + direccion +"','"+Tools.formato.format(new Date())+ "','1','"
                 + Tools.sha1(pass) + "'); ";
     }
 
@@ -65,4 +68,7 @@ public abstract class SQL {
         return "INSERT INTO `postulantes` (id_ele, id_opc, votos)VALUES('"+id_ele+"','"+id_opc+"','0');";
     }
     
+    public static String buscarPersona(String ci){
+        return "SELECT * FROM persona WHERE ci = '"+ci+"'";
+    }
 }
