@@ -51,7 +51,18 @@ public abstract class SQL {
     }
 
     public static String depurarVotantes(int id_elec) {
-        return "UPDATE `persona` LEFT JOIN votacion ON votacion.`ci` = persona.`ci` SET `habilitado`='0' WHERE votacion.`ci` IS NULL AND votacion.`id_ele` = '"+id_elec+"'; ";
+        return "UPDATE `persona` LEFT JOIN votacion\n"
+                + "ON votacion.`ci` = persona.`ci` \n"
+                + "SET persona.`habilitado`='0'\n"
+                + "WHERE votacion.`id_ele` = "+id_elec;
     }
 
+    public static String idOpciones(String cad){
+        return "SELECT id_opc FROM opciones WHERE opciones IN("+cad+")";
+    }
+    
+    public static String insertarPostulantes(int id_ele,int id_opc){
+        return "INSERT INTO `postulantes` (id_ele, id_opc, votos)VALUES('"+id_ele+"','"+id_opc+"','0');";
+    }
+    
 }

@@ -179,7 +179,7 @@ public class InterfazEleccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        InterfazOpciones interfazOpciones = InterfazOpciones.getInstance();
+        InterfazOpciones interfazOpciones = InterfazOpciones.getInstance(id);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -206,14 +206,16 @@ public class InterfazEleccion extends javax.swing.JFrame {
             }
             SimpleDateFormat formato = new SimpleDateFormat("YYYY-MM-dd 06:00:00");
             SimpleDateFormat formato1 = new SimpleDateFormat("YYYY-MM-dd 21:00:00");
-            Main.con.ejecutar(SQL.depurarVotantes(id-1));
-            Main.con.ejecutar(SQL.registrarEleccion(id, jTextField1.getText(), 
-                    formato.format(jCalendarComboBox1.getDate()), 
-                    formato1.format(jCalendarComboBox2.getDate()), 
-                    formato.format(jCalendarComboBox3.getDate()), 
+            Main.con.ejecutar(SQL.depurarVotantes(id - 1));
+            Main.con.ejecutar(SQL.registrarEleccion(id, jTextField1.getText(),
+                    formato.format(jCalendarComboBox1.getDate()),
+                    formato1.format(jCalendarComboBox2.getDate()),
+                    formato.format(jCalendarComboBox3.getDate()),
                     formato1.format(jCalendarComboBox4.getDate())));
+            this.id = id;
         }
     }
+    public int id = 0;
     private static InterfazEleccion myInstance;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
