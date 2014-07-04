@@ -17,7 +17,7 @@ public abstract class SQL {
                 + apellidop + "','"
                 + apellidom + "','"
                 + direccion + "','"
-                + Tools.sha1(pass)+"'); ";
+                + Tools.sha1(pass) + "'); ";
     }
 
     public static String mostrarUltimosNHabilitados(int limite) {
@@ -31,4 +31,27 @@ public abstract class SQL {
     public static String insertarOpcion(int id_opc, String opcion) {
         return "Insert into opciones(id_opc,opciones)values('" + id_opc + "','" + opcion + "');";
     }
+
+    public static String seleccionarOpciones() {
+        return "SELECT * FROM opciones";
+    }
+
+    public static String maximoIdSelec() {
+        return "SELECT MAX(id_elec)+1 id_elec FROM eleccion";
+    }
+
+    public static String registrarEleccion(int id_elec, String pregunta, String inic_inscrip, String fin_inscrip, String inicio, String fin) {
+        return "INSERT INTO eleccion(id_elec,pregunta,inic_inscrip,fin_inscrip,inicio,fin)VALUES('"
+                + id_elec + "','"
+                + pregunta + "','"
+                + inic_inscrip + "','"
+                + fin_inscrip + "','"
+                + inicio + "','"
+                + fin + "');";
+    }
+
+    public static String depurarVotantes(int id_elec) {
+        return "UPDATE `persona` LEFT JOIN votacion ON votacion.`ci` = persona.`ci` SET `habilitado`='0' WHERE votacion.`ci` IS NULL AND votacion.`id_ele` = '"+id_elec+"'; ";
+    }
+
 }
