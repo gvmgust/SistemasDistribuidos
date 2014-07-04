@@ -66,6 +66,7 @@ public class InterfazEleccion extends javax.swing.JFrame {
         jLabel4.setText("Fin Votacion         :");
 
         jButton1.setText("Registrar Opciones");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

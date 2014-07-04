@@ -27,14 +27,14 @@ public class InterfazOpciones extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Agregar Opciones a Eleccion");
     }
-
-     public static InterfazOpciones getInstance() {
+    
+    public static InterfazOpciones getInstance() {
         if (myInstance == null) {
             myInstance = new InterfazOpciones();
         }
         return myInstance;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +57,7 @@ public class InterfazOpciones extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -194,18 +195,24 @@ public class InterfazOpciones extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(InterfazOpciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Main.con.ejecutar(SQL.insertarOpcion(id_opc, opcion));
+        if (Tools.pregunta("Desea agregar " + opcion + " como nueva Opcion?")) {
+            Main.con.ejecutar(SQL.insertarOpcion(id_opc, opcion));
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void cargarDatos(){
+        
+    }
+    
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         myInstance = null;
     }//GEN-LAST:event_formWindowClosed
-
-    private class Opcion {
-
+    
+    private class Opcion {        
         int id_opc;
         String opcion;
     }
+    
     private DefaultTableModel modelo1 = new DefaultTableModel() {
         public boolean isCellEditable(int row, int column) {
             return false;

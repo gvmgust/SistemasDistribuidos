@@ -71,6 +71,7 @@ public class InterfazSR extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setText("Registrar Eleccion");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
