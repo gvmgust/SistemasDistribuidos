@@ -19,9 +19,9 @@ public class RegistrarImpl
     }
 
     @Override
-    public void registrarPersona(String ci, String nombre, String apellidop, String apellidom, String direccion, int habilitado) {
-        Conexion con = new Conexion("root", "", "localhost", "sistemasdistribuidos");
-        con.ejecutar(SQL.registrarPersona(ci, nombre, apellidop, apellidom, direccion, habilitado));
+    public void registrarPersona(String ci, String nombre, String apellidop, String apellidom, String direccion, int habilitado) {     
+        Main.con.ejecutar(SQL.registrarPersona(ci, nombre, apellidop, apellidom, direccion, habilitado));
+        Main.interfaz.actualizarVistaTablas();
     }
 
 }
