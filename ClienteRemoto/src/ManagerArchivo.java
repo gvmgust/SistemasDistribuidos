@@ -34,7 +34,7 @@ public class ManagerArchivo {
             FileReader fr = null;
             BufferedReader br = null;
             ArrayList<String> lineas = new ArrayList<String>();
-            fr = new FileReader(new File("estudio_juridico.conf"));
+            fr = new FileReader(new File("eleccion.conf"));
             br = new BufferedReader(fr);
             String temp = "";
             while ((temp = br.readLine()) != null) {
@@ -59,8 +59,8 @@ public class ManagerArchivo {
                 fr.close();
             }
         } catch (Exception e) {
-            escribirLog("[" + new Date() + "] ERROR al abrir Archivo de Configuracion (estudio_juridico.conf)" + e.getMessage());
-            escribirLog("[" + new Date() + "] Programa Finalizado -> Revise archivo: \"estudio_juridico.conf\"");
+            escribirLog("[" + new Date() + "] ERROR al abrir Archivo de Configuracion (eleccion.conf)" + e.getMessage());
+            escribirLog("[" + new Date() + "] Programa Finalizado -> Revise archivo: \"eleccion.conf\"");
         } finally {
             try {
             } catch (Exception e2) {
@@ -126,14 +126,14 @@ public class ManagerArchivo {
         BufferedWriter out = null;
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            File file = new File("estudio_juridico.log");
+            File file = new File("eleccion.log");
             if (!file.exists()) {
                 if (file.createNewFile()) {
                     out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "UTF8"));
-                    out.write("[" + new Date() + "] Creacion Log de Programa \"estudio_juridico.log\"");
+                    out.write("[" + new Date() + "] Creacion Log de Programa \"eleccion.log\"");
                     out.newLine();
                     out.close();
-                    file = new File("estudio_juridico.log");
+                    file = new File("eleccion.log");
                 } else {
                     System.out.println("No ha podido ser creado el fichero");
                 }
