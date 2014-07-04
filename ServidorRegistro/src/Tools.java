@@ -1,4 +1,8 @@
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -27,5 +31,27 @@ public abstract class Tools {
             }
         }
         return false;
+    }
+    
+    public static String sha1(String string) {
+        String hash = "";
+        try {
+            MessageDigest md;
+            byte[] buffer, digest;
+            buffer = string.getBytes();
+            md = MessageDigest.getInstance("SHA1");
+            md.update(buffer);
+            digest = md.digest();
+            for (byte aux : digest) {
+                int b = aux & 0xff;
+                if (Integer.toHexString(b).length() == 1) {
+                    hash += "0";
+                }
+                hash += Integer.toHexString(b);
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hash;
     }
 }
