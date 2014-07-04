@@ -1,0 +1,1 @@
+ALTER TABLE `sistemasdistribuidos`.`persona` ADD COLUMN `pass` VARCHAR(40) NOT NULL AFTER `habilitado`; 
