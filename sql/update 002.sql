@@ -1,1 +1,0 @@
-ALTER TABLE `persona` ADD COLUMN `fecha_inscripcion` DATETIME NULL AFTER `habilitado`; 
